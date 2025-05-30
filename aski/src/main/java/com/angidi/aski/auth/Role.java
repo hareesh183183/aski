@@ -1,4 +1,4 @@
-package com.angidi.aski.users;
+package com.angidi.aski.auth;
 
 import java.time.Instant;
 

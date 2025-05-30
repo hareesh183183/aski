@@ -3,6 +3,7 @@ package com.angidi.aski.users;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +33,7 @@ public class UserController {
 	public List<User> get(@RequestBody(required = false) User user) {
 		try {
 			if(null != user)
-				return repo.filter(user);
+				return repo.filter(user.getId(), user.getName(), user.getEmail(), user.getRoleId(), user.getCountry(), user.getCity());
 			else
 				return repo.findAll();
 		} catch (Exception e) {
@@ -41,4 +42,13 @@ public class UserController {
 		}
 	}
 
+	@GetMapping("/login/okta")
+	public User oktaLogin(@AuthenticationPrincipal User principal) throws Exception {
+		try {
+			return principal;
+		} catch (Exception e) {
+			LOG.error("User.get({}, {}, {}) ", principal, e);
+			throw e;
+		}
+	}
 }
