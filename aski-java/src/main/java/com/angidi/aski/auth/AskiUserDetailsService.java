@@ -40,14 +40,17 @@ public class AskiUserDetailsService implements UserDetailsService{
 	public User loadUserByOidc(StandardClaimAccessor oidc) throws UsernameNotFoundException {
 		User user = new User();
 		user.setEmail(oidc.getEmail());
-		user.setLastLoginOn(Instant.now());
 		List<User> users = repo.filter(null, null, user.getEmail(), null, null, null);
 		if (users.isEmpty()) {
 			user.setName(oidc.getFullName());
+			user.setEnabled(true);
+			user.setCreatedOn(Instant.now());
+			user.setUpdatedOn(Instant.now());
 			user.setRoleId(roleRepo.findByName("SUPPLIER").get().getId());
 		} else {
 			user = users.get(0);
 		}
+		user.setLastLoginOn(Instant.now());
 		user = repo.save(user);
 		return user;
 	}

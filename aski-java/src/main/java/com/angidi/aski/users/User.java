@@ -5,6 +5,8 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.Map;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
@@ -22,12 +24,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
 
 @Entity(name = "users")
-@JsonAutoDetect(
-	    getterVisibility = JsonAutoDetect.Visibility.NONE,
-	    setterVisibility = JsonAutoDetect.Visibility.NONE,
-	    isGetterVisibility = JsonAutoDetect.Visibility.NONE,
-	    creatorVisibility = JsonAutoDetect.Visibility.NONE,
-	    fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@Getter
+@Setter
+@JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE, creatorVisibility = JsonAutoDetect.Visibility.NONE, fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class User implements OidcUser, UserDetails, Principal {
 
 	@Id
@@ -39,6 +38,7 @@ public class User implements OidcUser, UserDetails, Principal {
 	private Long roleId;
 	private String country;
 	private String city;
+	private String state;
 	@Column(name = "created_on")
 	private Instant createdOn;
 	@Column(name = "updated_on")
@@ -51,86 +51,6 @@ public class User implements OidcUser, UserDetails, Principal {
 	private OidcUser oidc;
 
 	private boolean enabled;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Long getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public Instant getCreatedOn() {
-		return createdOn;
-	}
-
-	public void setCreatedOn(Instant createdOn) {
-		this.createdOn = createdOn;
-	}
-
-	public Instant getUpdatedOn() {
-		return updatedOn;
-	}
-
-	public void setUpdatedOn(Instant updatedOn) {
-		this.updatedOn = updatedOn;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public Instant getLastLoginOn() {
-		return lastLoginOn;
-	}
-
-	public void setLastLoginOn(Instant lastLoginOn) {
-		this.lastLoginOn = lastLoginOn;
-	}
 
 	@Override
 	public String toString() {
