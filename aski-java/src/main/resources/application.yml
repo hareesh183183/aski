@@ -4,7 +4,6 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/aski
     username: postgres
-    password: ***
   jpa:
     hibernate:
       ddl-auto=update
@@ -18,8 +17,6 @@ spring:
       client:
         registration:
           google:
-            client-id: 366526718418-60to21lqsq6m7plarju8jugc3h2k1lcr.apps.googleusercontent.com
-            client-secret: ***
               
 server:
   port: 5000

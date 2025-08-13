@@ -8,7 +8,7 @@
 }
 
 .Aski-App-logo {
-  height: 40vmin;
+  height: 10vmin;
   pointer-events: none;
 }
 
@@ -40,4 +40,13 @@
   to {
     transform: rotate(360deg);
   }
+}
+td {
+  text-align: left;
+}
+table{
+  padding-left: 40%;
+}
+html{
+  background-color: rgb(240, 234, 226);
 }

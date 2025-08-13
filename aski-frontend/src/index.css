@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.orange-text {
+  color:rgb(158, 82, 6);
+  font-weight: bold;
+}

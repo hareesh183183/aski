@@ -1,8 +1,9 @@
-package com.angidi.aski.auth;
+package com.angidi.aski.users;
 
 import java.time.Instant;
 import java.util.List;
 
+import com.angidi.aski.auth.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,17 +11,17 @@ import org.springframework.security.oauth2.core.oidc.StandardClaimAccessor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.angidi.aski.users.User;
-import com.angidi.aski.users.UserRepository;
-
 @Service
 public class AskiUserDetailsService implements UserDetailsService{
 
-	@Autowired
-	UserRepository repo;
-	
-	@Autowired
-	RoleRepository roleRepo;
+
+	private final UserRepository repo;
+    private final RoleRepository roleRepo;
+
+    public AskiUserDetailsService(UserRepository repo, RoleRepository roleRepo) {
+        this.repo = repo;
+        this.roleRepo = roleRepo;
+    }
 	
 	@Override
 	@Transactional
